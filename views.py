@@ -9,9 +9,10 @@ def home():
 # Passing in data through the url and query parameters 
 @views.route("/profile")
 def profile():
-    args = request.args
-    name = args.get('name')
-    return render_template("index.html", name=name)
+    # args = request.args
+    # name = args.get('name')
+    # return render_template("index.html", name=name)
+    return render_template("profile.html")
 
 # Displaying json data
 @views.route("/json")
