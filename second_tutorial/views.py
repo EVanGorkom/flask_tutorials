@@ -13,6 +13,8 @@ def login():
         session["user"] = user
         return redirect(url_for("views.user"))
     else:
+        if "user" in session and session["user"] != '':
+            return redirect(url_for("views.user"))
         return render_template("login.html")
 
 @views.route("/user")
@@ -22,3 +24,8 @@ def user():
         return f"<h1>{user}</h1>"
     else:
         return redirect(url_for("views.login"))
+
+@views.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("views.login"))
