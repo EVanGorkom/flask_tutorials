@@ -9,6 +9,7 @@ def home():
 @views.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+        session.permanent = True
         user = request.form["nm"]
         session["user"] = user
         return redirect(url_for("views.user"))
