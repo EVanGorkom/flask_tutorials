@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, render_template, request, session
+from flask import Blueprint, redirect, url_for, render_template, request, session, flash
 
 views = Blueprint(__name__, "views")
 
@@ -29,4 +29,5 @@ def user():
 @views.route("/logout")
 def logout():
     session.pop("user", None)
+    flash("You have logged out successfully!", "info")
     return redirect(url_for("views.login"))
