@@ -12,7 +12,7 @@ class StoreList(MethodView):
     def get(self):
         return {"stores": list(stores.values())}
     
-    def post():
+    def post(self):
         store_data = request.get_json()
         if "name" not in store_data:
             abort(
