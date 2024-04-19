@@ -10,10 +10,12 @@ blue = Blueprint("items", __name__, description="Operations on items")
 
 @blue.route("/item")
 class ItemList(MethodView):
+    @blue.response(200, ItemSchema(many=True))
     def get(self):
-        return {"items": list(items.values())}
+        return items.values()
 
     @blue.arguments(ItemSchema)
+    @blue.response(200, ItemSchema)
     def post(self, item_data):
         for item in items.values():
             if (
@@ -32,13 +34,15 @@ class ItemList(MethodView):
 
 @blue.route("/item/<string:item_id>")
 class Item(MethodView):
+    @blue.response(200, ItemSchema)
     def get(self, item_id):
         try:
             return items[item_id]
         except KeyError:
             abort(404, message="Store not found")
 
-    @blue.arguments(ItemUpdateSchema)
+    @blue.arguments(ItemUpdateSchema) #Arguments
+    @blue.responses(200, ItemSchema) #Responses
     def put(self, item_data, item_id):
         try:
             item = items[item_id]
