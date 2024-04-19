@@ -15,7 +15,7 @@ class ItemList(MethodView):
         return items.values()
 
     @blue.arguments(ItemSchema)
-    @blue.response(200, ItemSchema)
+    @blue.response(201, ItemSchema)
     def post(self, item_data):
         for item in items.values():
             if (
